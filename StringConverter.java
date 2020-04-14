@@ -13,7 +13,13 @@ public class StringConverter
     
     public static boolean checkPalindrome(String str)
     {
-        String space = puncuation(str);
+        String space = str.replaceAll(" ", "");
+        String question = space.replaceAll("?", "");
+        String period = question.replaceAll(".", "");
+        String exclam = period.replaceAll("!", "");
+        String comma = exclam.replaceAll(",", "");
+        
+        space = comma;
         String print = "";
         
         if(space.length() % 2 == 0)
@@ -36,18 +42,63 @@ public class StringConverter
     
     public static String pigLatinate(String str)
     {
-        
+        String vowel = "aeiouAEIOU";
+        for(int i = 0; i < str.length(); i++)
+        {
+            if(vowel.indexOf(str.substring(i, i + 1)) >= 0)
+            {
+                if(i == 0)
+                {
+                    String pigLatinFirst = str + "yay";
+                    return pigLatinFirst;
+                }
+                else
+                {
+                    if(str.toUpperCase().substring(0,1).equals(str.substring(0,1)))
+                    {
+                        String decap = str.toLowerCase().substring(0,1);
+                        String upper = str.toUpperCase().substring(i + 1, i + 2);
+                        String start = decap + str.substring(1, i + 1);
+                        String end = upper + str.substring(i + 2, str.length());
+                        return end + start + "ay";
+                    }
+                    else
+                    {
+                        String start = str.substring(0, i + 1);
+                        String end = str.substring(i + 1, str.length());
+                        return end + start + "ay";
+                    }
+                }
+            }
+            
+        }
+        return str + "ay";
     }
     
     public static String shorthand(String str)
     {
+        String complete = "";
         String and = str.replaceAll("and", "&");
         String four = and.replaceAll("for", "4");
         String to = four.replaceAll("to", "2");
-        String you = to.replaceAll("you", "U");
+        String you = to.replaceAll("you", "@@@");
         
+        String vowel = "aeiouAEIOU";
         
+        for(int i = 0; i < you.length(); i++)
+        {
+            if(vowel.indexOf(you.substring(i, i + 1)) >= 0)
+            {
+                int location = vowel.indexOf(you.substring(i, i + 1));
+                complete = you.replaceAll((vowel.substring(location, location + 1)), "");
+                you = complete;
+            }
+        }
+        String last = complete.trim();
+        last = last.replaceAll("@@@", "U");
+        return last;
     }
+    
     
     public String puncuation(String str)
     {
