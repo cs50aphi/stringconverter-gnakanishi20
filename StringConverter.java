@@ -13,13 +13,8 @@ public class StringConverter
     
     public static boolean checkPalindrome(String str)
     {
-        String space = str.replaceAll(" ", "");
-        String question = space.replaceAll("?", "");
-        String period = question.replaceAll(".", "");
-        String exclam = period.replaceAll("!", "");
-        String comma = exclam.replaceAll(",", "");
         
-        space = comma;
+        String space = str.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
         String print = "";
         
         if(space.length() % 2 == 0)
@@ -43,6 +38,10 @@ public class StringConverter
     public static String pigLatinate(String str)
     {
         String vowel = "aeiouAEIOU";
+        str = str.replaceAll(" ", "spaceee");
+        str = str.replaceAll("[^a-zA-Z0-9]", "");
+        str = str.replaceAll("spaceee", " ");
+        
         for(int i = 0; i < str.length(); i++)
         {
             if(vowel.indexOf(str.substring(i, i + 1)) >= 0)
@@ -57,15 +56,15 @@ public class StringConverter
                     if(str.toUpperCase().substring(0,1).equals(str.substring(0,1)))
                     {
                         String decap = str.toLowerCase().substring(0,1);
-                        String upper = str.toUpperCase().substring(i + 1, i + 2);
-                        String start = decap + str.substring(1, i + 1);
-                        String end = upper + str.substring(i + 2, str.length());
+                        String upper = str.toUpperCase().substring(i, i + 1);
+                        String start = decap + str.substring(0, i);
+                        String end = upper + str.substring(i + 1, str.length());
                         return end + start + "ay";
                     }
                     else
                     {
-                        String start = str.substring(0, i + 1);
-                        String end = str.substring(i + 1, str.length());
+                        String start = str.substring(0, i);
+                        String end = str.substring(i, str.length());
                         return end + start + "ay";
                     }
                 }
@@ -97,16 +96,5 @@ public class StringConverter
         String last = complete.trim();
         last = last.replaceAll("@@@", "U");
         return last;
-    }
-    
-    
-    public String puncuation(String str)
-    {
-        String space = str.replaceAll(" ", "");
-        String question = space.replaceAll("?", "");
-        String period = question.replaceAll(".", "");
-        String exclam = period.replaceAll("!", "");
-        String comma = exclam.replaceAll(",", "");
-        return comma;
     }
 }
