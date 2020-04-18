@@ -2,11 +2,10 @@ public class StringConverter
 {
     public static String reverse(String str)
     {
-        String first = str;
         String print = "";
-        for(int i = first.length(); i > 0; i--)
+        for(int i = str.length(); i > 0; i--)
         {
-            print = print + first.substring(i - 1, i);
+            print = print + str.substring(i - 1, i);
         }
         return print;
     }
@@ -55,10 +54,8 @@ public class StringConverter
                 {
                     if(str.toUpperCase().substring(0,1).equals(str.substring(0,1)))
                     {
-                        String decap = str.toLowerCase().substring(0,1);
-                        String upper = str.toUpperCase().substring(i, i + 1);
-                        String start = decap + str.substring(0, i);
-                        String end = upper + str.substring(i + 1, str.length());
+                        String start = str.toLowerCase().substring(0,1) + str.substring(0, i - 1);
+                        String end = str.toUpperCase().substring(i, i + 1) + str.substring(i + 1, str.length());
                         return end + start + "ay";
                     }
                     else
